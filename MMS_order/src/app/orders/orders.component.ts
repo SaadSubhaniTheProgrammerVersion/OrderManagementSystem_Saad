@@ -64,8 +64,12 @@ export class OrdersComponent {
   {
     alert("Editing");
   }
-  deleteOrder()
-  {
-    alert("Deleting");
+  deleteOrder(_id: string) {
+    if (confirm('Are you sure to delete this record ?') == true) {
+      this.orderService.deleteOrder(_id).subscribe((res) => {
+        this.refreshOrderList();
+        M.toast({ html: 'Deleted successfully', classes: 'rounded' });
+      });
+    }
   }
 }
