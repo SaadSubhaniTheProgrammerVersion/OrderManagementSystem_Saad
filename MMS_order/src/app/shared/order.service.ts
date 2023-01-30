@@ -29,9 +29,11 @@ export class OrderService {
   putOrder(ord: Order) {
     return this.http.put(this.baseURL + `/${ord.order_id}`, ord);
   }
-  deleteOrder(id: string) {
-    return this.http.delete(this.baseURL + `/deleteOrder/${id}`);
-  }
+  deleteOrder(ord: Order) {
+    return this.http.delete(this.baseURL + `/deleteOrder`, {
+        body: ord
+    });
+}
   
 
 }

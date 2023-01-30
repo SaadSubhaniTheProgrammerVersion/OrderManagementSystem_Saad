@@ -50,9 +50,9 @@ router.post('/addOrder', async(req, res)=>{
     res.json(true)
 })
 
-router.delete('/deleteOrder/:id', async(req, res)=>{
-    await orderModel.findOneAndDelete({id: req.body.order_id}).deleteOne().exec()
-    res.json("successfully deleted")
+router.delete('/deleteOrder', async(req, res)=>{
+    await orderModel.find({id: req.body.order_id}).deleteOne().exec()
+    res.json("Successfully deleted")
 })
 
 router.put('/updateOrderAddress', async(req, res)=>{
