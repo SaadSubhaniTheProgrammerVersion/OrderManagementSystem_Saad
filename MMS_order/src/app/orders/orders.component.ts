@@ -72,8 +72,8 @@ export class OrdersComponent {
       });
     }
   }
-  displayObject(obj: any) {
-    return JSON.stringify(obj);
-  }
+  // displayObject(obj: any) {
+  //   return JSON.stringify(obj);
+  // }
 
 }
