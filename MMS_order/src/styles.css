@@ -35,7 +35,7 @@ input.ng-invalid.ng-dirty{
     background-color: transparent;
     font-size: 1.1rem;
     margin : 0px 5px;
-    border: #fff solid 1px ;
+    border: #fff solid 2px ;
     text-transform:none;
 }
 
