@@ -21,7 +21,9 @@
                      
                 </td>
                 <td>
-                    {{ord.products}}
+                    <div *ngFor="let string of ord.products | keyvalue">
+                        {{string.key}} : {{string.value}}
+                    </div>
                 </td>
                 <td>
                     {{ord.shipping_address}}
@@ -39,9 +41,14 @@
                 </td>
                 <td>
                     <div class="line">
+                        <a class="action-btn">
+                            <i class="material-icons"
+                              (click)="editOrderStatus(ord)">delivery_dining</i> 
+                        </a>
+                        
                     <a class="action-btn">
                         <i class="material-icons"
-                          (click)="editOrder()">edit</i> 
+                          (click)="editOrderAddress(ord)">edit</i> 
                     </a>
                     <a class="action-btn" >
                         <i class="material-icons"

@@ -59,10 +59,32 @@ export class OrdersComponent {
   //       M.toast({ html: 'Updated successfully', classes: 'rounded' });
   //     });
   //   }
-
-  editOrder()
+  editOrderStatus(ord: Order)
   {
-    alert("Editing");
+    this.orderService.statusOrder(ord).subscribe((res) => {
+      this.refreshOrderList();
+      M.toast({ html: 'Updated successfully', classes: 'rounded' });
+    }
+    );
+  }
+  editOrderAddress(ord: Order)
+  {
+    var shipping_address=prompt("Enter the new shipping address: ");
+
+
+    if(shipping_address==null)
+    {
+      shipping_address=ord.shipping_address;
+    }
+  
+    ord.shipping_address=shipping_address;
+    
+    this.orderService.putOrder(ord).subscribe((res) => {
+      this.refreshOrderList();
+      M.toast({ html: 'Updated successfully', classes: 'rounded' });
+    }
+    );
+    
   }
   deleteOrder(ord: Order) {
     if (confirm('Are you sure to delete this record ?') == true) {
@@ -72,8 +94,5 @@ export class OrdersComponent {
       });
     }
   }
-  // displayObject(obj: any) {
-  //   return JSON.stringify(obj);
-  // }
-
+ 
 }

@@ -12,7 +12,7 @@ export class OrderService {
   selectedOrder: Order={
     order_id: "",
     user: "",
-    products: [],
+    products: {},
     shipping_address: "",
     cost: 0,
     status: ""
@@ -27,8 +27,12 @@ export class OrderService {
     return this.http.get(this.baseURL+'/getAllOrders');
   }
   putOrder(ord: Order) {
-    return this.http.put(this.baseURL + `/${ord.order_id}`, ord);
-  }
+    console.log("putOrder: " + ord.order_id)
+   return this.http.put(this.baseURL + `/updateOrderAddress`, ord);
+   }
+   statusOrder(ord: Order) {
+    return this.http.put(this.baseURL + `/updateOrderStatus`, ord);
+    }
   deleteOrder(ord: Order) {
     return this.http.delete(this.baseURL + `/deleteOrder`, {
         body: ord

@@ -18,7 +18,6 @@ function countQuantities(products){
     cost = 0;
     for (let product of products){
         await categoryModel.find({'products._id': product}).select({'products._id':1, 'products.price':1}).then((p)=>{
-            console.log("product object: ", p[0].products)
             p[0].products.forEach((i)=>{
                 if (product == i._id){
                     cost += i.price
@@ -34,7 +33,6 @@ router.get('/getAllOrders', async(req, res)=>{
     await orderModel.find({}).then((orders)=>{
         orders.map((order)=>{
            order_formatted.push({order_id: order._id, user: order.user_id, 'products': countQuantities(order.product_id), shipping_address: order.shipping_address, cost: order.cost, status: order.status})
-           console.log("order formatted: ", order_formatted)
         })
         
     });
@@ -44,18 +42,18 @@ router.get('/getAllOrders', async(req, res)=>{
 router.post('/addOrder', async(req, res)=>{
     // first do payment
     cost = await findCost(req.body.product_id)
-    console.log(req.body.user_id, req.body.product_id, req.body.shipping_address, req.body.status, cost)
     newOrder = new orderModel({user_id: req.body.user_id, product_id: req.body.product_id, shipping_address: req.body.shipping_address, cost: cost, status: req.body.status})
     await newOrder.save()
     res.json(true)
 })
 
 router.delete('/deleteOrder', async(req, res)=>{
-    await orderModel.find({id: req.body.order_id}).deleteOne().exec()
+    await orderModel.find({_id: req.body.order_id}).deleteOne().exec()
     res.json("Successfully deleted")
 })
 
 router.put('/updateOrderAddress', async(req, res)=>{
+    console.log("body=",req.body);
     await orderModel.findOneAndUpdate({_id: req.body.order_id}, {shipping_address: req.body.shipping_address})
     res.json("Updated address")
 })
